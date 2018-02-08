@@ -1,14 +1,14 @@
 <?php
 
-include_once('config/db.php');
+include_once('application/config/config.php');
 
 class DB {
 
     private static function connect(){
         $host = DB_HOST;
-        $dbName = DB_DATABASE;
-        $username = DB_USERNAME;
-        $password = DB_PASSWORD;
+        $dbName = DB_NAME;
+        $username = DB_USER;
+        $password = DB_PASS;
 
         $pdo = new PDO("mysql:host=$host;dbname=$dbName;charset=utf8", $username, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
