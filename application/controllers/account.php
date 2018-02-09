@@ -10,6 +10,9 @@ class Account extends Controller {
             include_once('classes/db.php');
             include_once('lib/security.php');
 
+            $login_model = $this->load_model('account', 'LoginModel');
+            $login_model->login($_POST['email'], $_POST['password']);
+
             $email = $_POST['email'];
             $password = $_POST['password'];
         
@@ -34,7 +37,12 @@ class Account extends Controller {
                     $token = Security::generate_token();
                     $user_id  = Security::get_userid_byemail($email);
                     
-                    DB::query('INSERT INTO login_tokens (token, user_id) VALUES(:token, :user_id)', array(':token'=>sha1($token), ':user_id'=> $user_id));
+
+                    $sql = 'INSERT INTO login_tokens (token, user_id) VALUES(:token, :user_id)';
+                    $query = $this->db->prepare($sql);
+                    $query->execute(array(':token' => sha1($token), ':user_id' => $user_id));
+
+                   // DB::query('INSERT INTO login_tokens (token, user_id) VALUES(:token, :user_id)', array(':token'=>sha1($token), ':user_id'=> $user_id));
                    
                     setcookie("SNID", $token, time() + 60 * 60 * 24 * 7, '/', NULL, NULL, TRUE);
                     setcookie("SNID_", 1, time() + 60 * 60 * 24 * 3, '/', NULL, NULL, TRUE);   
@@ -88,8 +96,12 @@ class Account extends Controller {
             if (empty($validation_message)) {        
                 $hashed_password = password_hash($password, PASSWORD_BCRYPT);   
         
-                DB::query("INSERT INTO users (username, email, password) VALUES(:username, :email, :password)",
-                           array(':username'=>$email , ':email'=> $email, ':password'=>$hashed_password));
+                $sql = 'INSERT INTO users (username, email, password) VALUES(:username, :email, :password)';
+                $query =  $this->db->prepare($sql);
+                $query->execute(array(':username' => $email , ':email' => $email, ':password' => $hashed_password));
+
+                // DB::query("INSERT INTO users (username, email, password) VALUES(:username, :email, :password)",
+                //            array(':username'=>$email , ':email'=> $email, ':password'=>$hashed_password));
         
                 // login registered user and redirect to home
                 header('location: ' . URL . 'home/index');

@@ -12,8 +12,8 @@ class Controller {
         $this->open_db_conncetion();
     }
 
-    public function load_model($model_name){
-        require 'application/models/' . strtolower($model_name) . '.php';
+    public function load_model($model_folder, $model_name){
+        require 'application/models/' . $model_folder . '/' . strtolower($model_name) . '.php';
         
         //  pass db connetion to model and return it
         return new $model_name($this->db);
