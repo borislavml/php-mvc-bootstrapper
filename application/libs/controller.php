@@ -5,7 +5,7 @@
 class Controller {
 
     // db connection
-    private $db = null;
+    protected $db = null;
     
     // open db connection upon controller request and use this one connection for all models
     public function __construct(){

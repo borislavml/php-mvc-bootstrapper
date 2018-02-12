@@ -1,3 +1,5 @@
+<?php $user_is_logged = Security::is_logged($this->db); ?>
+
 <!DOCTYPE html>
 <html lang="eng">
     <head>
@@ -19,22 +21,53 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
                 crossorigin="anonymous"></script>
+        <script src="<?php echo URL; ?>public/js/site.js"></script>
     </head>
     <body>
-        <!-- header -->
+        <!-- navbar-menu start -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="<?php echo URL; ?>">PHP-MVC</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URL; ?>account/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URL; ?>account/register">Register</a>
-                    </li>
+                <ul class="navbar-nav ml-auto">
+                    <?php if(!$user_is_logged) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo URL; ?>account/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo URL; ?>account/register">Register</a>
+                        </li> 
+                    <?php } else { ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" 
+                            id="navbarDropdown"
+                            role="button" 
+                            data-toggle="dropdown" 
+                            aria-haspopup="true" 
+                            aria-expanded="false"> <?php  echo Security::get_username($this->db);?></a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <form action="<?php echo URL; ?>account/logout" method="POST" id="logout-form" class="form-inline">
+                                    <a class="dropdown-item" name="logout"  href="#">
+                                     Logout
+                                    </a>          
+                                </form> 
+                            </div>
+                         </li>
+                    <?php } ?>
                 </ul>
             </div>
         </nav>
+        <!-- navbar-menu end -->
+        <!-- main start -->
+        <div class="container-fluid" style="padding:5px">
+          <div class="row">                    
+            
+
+
+
+
+
+
+
