@@ -79,11 +79,26 @@ class Security {
         return false;
     }
 
+    public static function register($db, $password, $email) {
+
+    }
+
+    public static function login($db, $email) {
+        // generate token, insert hashed token in DB, set token in cookie
+        $token = Security::generate_token($db);
+        $user_id  = Security::get_userid_byemail($db, $email);
+    
+        $query_insert = $db->prepare("INSERT INTO login_tokens (token, user_id) VALUES(:token, :user_id)");
+        $query_insert->execute(array(':token' => sha1($token), ':user_id' => $user_id));
+
+        setcookie("SNID", $token, time() + 60 * 60 * 24 * 7, '/', NULL, NULL, TRUE);
+        setcookie("SNID_", 1, time() + 60 * 60 * 24 * 3, '/', NULL, NULL, TRUE);   
+    }
+
     public static function logout($db) {
         if (isset($_COOKIE['SNID'])) {
             $query_delete = $db->prepare("DELETE FROM login_tokens WHERE token=:token");
             $query_delete->execute(array(":token" => sha1($_COOKIE["SNID"])));
-
 
             //delete cookie and  expire 
             unset($_COOKIE['SNID']);

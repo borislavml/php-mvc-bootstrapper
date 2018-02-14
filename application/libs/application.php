@@ -4,21 +4,17 @@ class Application {
     
     private $controller = null;
     private $action = null;
-    
-    // we can't get parameters count dynamiclly 
-    //so we'll stick with 2 and add more if needed
-    private $param_1 = null;
-    private $param_2 = null;
+    private $parameters = null;
 
     // start application
     // analyze url rewrite - parse controller, methods, params and fallbacks
     public function __construct(){
         $this->split_url();
         // check if requested controller exists
-        if (file_exists('./application/controllers/'. $this->controller. '.php')) {
+        if (file_exists(Config::get('PATH_CONTROLLERS') . $this->controller. '.php')) {
 
             // if so, then load this file and create this controller
-            require './application/controllers/' . $this->controller . '.php';
+            require Config::get('PATH_CONTROLLERS') . $this->controller . '.php';            
             $this->controller = new $this->controller();
 
             // check if method/action for the requested controller exists
@@ -38,7 +34,7 @@ class Application {
             }                    
         } else {
             // invalid url 
-            require './application/controllers/home.php';
+            require  Config::get('PATH_CONTROLLERS') . 'home.php';
             $home = new Home();
             $home->index();
         }        
@@ -54,8 +50,12 @@ class Application {
             // set url parts to accrordin properties
             $this->controller = (isset($url[0]) ? $url[0] : null);
             $this->action = (isset($url[1]) ? $url[1] : null);
-            $this->param_1 = (isset($url[2]) ? $url[2] : null);
-            $this->param_2 = (isset($url[3]) ? $url[3] : null);
+            
+            // remove controller and action from the split URL
+            unset($url[0], $url[1]);
+
+             // rebase array keys and store the URL parameters
+             $this->parameters = array_values($url);
         }
     }
 }

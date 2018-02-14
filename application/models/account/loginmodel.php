@@ -31,17 +31,9 @@ class Loginmodel {
 
             if(password_verify($password, $db_password)){
                 // generate token, insert hashed token in DB, set token in cookie
-                $token = Security::generate_token($this->db);
-                $user_id  = Security::get_userid_byemail($this->db, $email);
-            
-                $query_insert = $this->db->prepare("INSERT INTO login_tokens (token, user_id) VALUES(:token, :user_id)");
-                $query_insert->execute(array(':token' => sha1($token), ':user_id' => $user_id));
-
-                setcookie("SNID", $token, time() + 60 * 60 * 24 * 7, '/', NULL, NULL, TRUE);
-                setcookie("SNID_", 1, time() + 60 * 60 * 24 * 3, '/', NULL, NULL, TRUE);   
-                
-                // we're all good, redirect logged user to home
-                header('location: ' . URL . 'home/index');
+                Security::login($this->db, $email);                
+                // redirect logged user to home
+                header('location: ' . Config::get('URL') . 'home/index');
             } else {
                 $validation_message .= "Invaid password";
             }            

@@ -1,25 +1,23 @@
 <?php
 
-
-
 class Home extends Controller {
 
     public function index() {
-        require './application/views/_templates/header.php';
-        require './application/views/_templates/sidebar.php';
-        require 'application/views/home/index.php';
-        require './application/views/_templates/footer.php';
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'header.php';
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'sidebar.php';
+        require Config::get('PATH_VIEWS') . 'home/index.php';
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'footer.php';
     }
 
-    public function not_foud() {
-        require 'application/views/_templates/header.php';
-        require 'application/views/home/not_found.php';
-        require 'application/views/_templates/footer.php';
+    public function notfound() {
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'header.php';
+        require Config::get('PATH_VIEWS') . 'home/notfound.php';
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'footer.php';
     }
 
     public function error() {
-        require 'application/views/_templates/header.php';
-        require 'application/views/home/error.php';
-        require 'application/views/_templates/footer.php';
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'header.php';
+        require Config::get('PATH_VIEWS') . 'home/error.php';
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'footer.php';
     }
 }

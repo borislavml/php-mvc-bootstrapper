@@ -1,6 +1,6 @@
 <div class="col-md-4 col-sm-2 col-lg-4"> </div>
 <div class="col-md-4 col-sm-8 col-lg-4">
-    <form action="<?php echo URL; ?>account/login" method="POST">
+    <form action="<?php echo Config::get('URL'); ?>account/login" method="POST">
         <div class="form-group"><h4 class="text-center"> Login</h1></div>
         <div class="form-group">
             <label for="email">Email address</label>

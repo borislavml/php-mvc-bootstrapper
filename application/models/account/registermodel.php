@@ -35,7 +35,8 @@ class RegisterModel {
             $query_insert->execute(array(':username' => $email , ':email' => $email, ':password' => $hashed_password));
     
             // login registered user and redirect to home
-            header('location: ' . URL . 'home/index');
+            Security::login($this->db,  $email);
+            header('location: ' . Config::get('URL') . 'home/index');
         } 
 
         return  $validation_message;       

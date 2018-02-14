@@ -10,9 +10,9 @@ class Account extends Controller {
         }
         
         // handle GET request
-        require './application/views/_templates/header.php';
-        require 'application/views/account/login.php';
-        require './application/views/_templates/footer.php';
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'header.php';
+        require Config::get('PATH_VIEWS') . 'account/login.php';
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'footer.php';
     }
 
     public function register() {        
@@ -23,26 +23,16 @@ class Account extends Controller {
         }
         
         // handle GET request
-        require './application/views/_templates/header.php';
-        require 'application/views/account/register.php';
-        require './application/views/_templates/footer.php';
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'header.php';
+        require Config::get('PATH_VIEWS') . 'account/register.php';
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'footer.php';
     }
 
     public function logout() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_COOKIE['SNID'])) {
-                $query_delete = $this->db->prepare("DELETE FROM login_tokens WHERE token=:token");
-                $query_delete->execute(array(":token" => sha1($_COOKIE["SNID"])));
-    
-    
-                //delete cookie and  expire 
-                unset($_COOKIE['SNID']);
-                unset($_COOKIE['SNID_']);
-                setcookie('SNID', "", time()-3600);
-                setcookie('SNID_', "", time()-3600);
-            }          
+            Security::logout($this->db);        
         }
 
-        header('location: ' . URL . 'home/index');
+        header('location: ' . Config::get('URL') . 'home/index');
     }
 }

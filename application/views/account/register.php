@@ -1,6 +1,6 @@
 <div class="col-md-4 col-sm-2"></div>
 <div class="col-md-4 col-sm-8">
-    <form action="<?php echo URL; ?>account/register" method="POST">
+    <form action="<?php echo Config::get('URL'); ?>account/register" method="POST">
         <div class="form-group">
             <h4 class="text-center">Register</h4>
         </div>
