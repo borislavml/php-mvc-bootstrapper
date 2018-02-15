@@ -14,18 +14,19 @@ class Security {
         return  $query->fetchAll()[0]->id;
     }
 
-    public static function get_userid($db){
+    public static function get_current_userid($db){
         if (isset($_COOKIE['SNID'])) {
             $query = $db->prepare("SELECT user_id from login_tokens WHERE token=:token");
             $query->execute(array(':token'=> sha1($_COOKIE['SNID'])));
 
-            return $query->fetchAll()[0]->user_id;            
+            $result = $query->fetchAll();
+            return isset($result[0]->user_id) ? $result[0]->user_id  : -1;            
          }
 
          return -1;
     }
 
-    public static function get_username($db){
+    public static function get_current_username($db){
         if (isset($_COOKIE['SNID'])) {
             $query = $db->prepare("SELECT u.username FROM users as u
                                    JOIN login_tokens as t on u.id = t.user_id 
@@ -106,6 +107,15 @@ class Security {
             setcookie('SNID', null, time()-3600);
             setcookie('SNID_', null, time()-3600);
         }                
+    }
+
+    public static function user_is_in_role($db, $user_id, $role_id) {
+        $query = $db->prepare("SELECT user_id from users_in_roles WHERE user_id=:user_id AND role_id=:role_id");
+        $query->execute(array(":user_id" => $user_id, ":role_id" => $role_id));
+
+        $result = $query->fetchAll();
+
+        return isset($result[0]->user_id);        
     }
 }
 

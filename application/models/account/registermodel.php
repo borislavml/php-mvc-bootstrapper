@@ -29,11 +29,11 @@ class RegisterModel {
     
         // if validation passed insert user in db
         if (empty($validation_message)) {        
-            $hashed_password = password_hash($password, PASSWORD_BCRYPT);   
 
-            $query_insert =  $this->db->prepare("INSERT INTO users (username, email, password) VALUES(:username, :email, :password)");
-            $query_insert->execute(array(':username' => $email , ':email' => $email, ':password' => $hashed_password));
-    
+            // create user and to default consumer role
+            $user_id = UserManager::create_user($this->db, $email, $password); 
+            UserManager::add_user_to_role($this->db, $user_id, Config::get('ROLE_CONSUMER'));
+
             // login registered user and redirect to home
             Security::login($this->db,  $email);
             header('location: ' . Config::get('URL') . 'home/index');

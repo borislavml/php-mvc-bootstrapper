@@ -42,7 +42,14 @@ return array (
     'DB_HOST' => 'localhost',
     'DB_NAME' => 'bootstrap',
     'DB_USER' => 'root' ,
-    'DB_PASS' => '***********************************************',   
+    'DB_PASS' => '**************************************************',   
+
+
+    /**
+     * DB user roles 
+     */
+    'ROLE_ADMIN' => '784e1b64-1241-11e8-9f5a-10c37b93cc7b',
+    'ROLE_CONSUMER' => '77fbc319-1241-11e8-9f5a-10c37b93cc7b',
 );
 
 

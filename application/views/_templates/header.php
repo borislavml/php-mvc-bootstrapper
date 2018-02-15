@@ -1,4 +1,7 @@
-<?php $user_is_logged = Security::is_logged($this->db); ?>
+<?php $user_is_logged = Security::is_logged($this->db);
+      $user_id = Security::get_current_userid($this->db);
+      $user_is_admin = $user_is_logged && Security::user_is_in_role($this->db, $user_id, Config::get('ROLE_ADMIN')) 
+?>
 
 <!DOCTYPE html>
 <html lang="eng">
@@ -47,7 +50,7 @@
                             role="button" 
                             data-toggle="dropdown" 
                             aria-haspopup="true" 
-                            aria-expanded="false"> <?php  echo Security::get_username($this->db);?></a>
+                            aria-expanded="false"> <?php  echo Security::get_current_username($this->db);?></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <form action="<?php echo Config::get('URL'); ?>account/logout" 
                                       method="POST" 

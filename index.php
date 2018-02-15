@@ -12,19 +12,12 @@ require 'application/libs/config.php';
 require 'application/libs/application.php';
 require 'application/libs/controller.php';
 require 'application/libs/security.php';
+require 'application/libs/usermanager.php';
 
 
 // start application
 $app = new Application();   
 
+//$current_user = UserManager::get_current_user($this->db);
 
-// include_once('lib/security.php');
-
-// $username = 'anonymous';
-// $user_id = '';
-// $isLogged = Security::is_logged(); 
-// if ($isLogged) {
-//     $user_id = Security::get_userid();
-//     $username = Security::get_username();
-// }
 
