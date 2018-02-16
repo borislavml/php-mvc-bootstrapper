@@ -68,3 +68,7 @@ CREATE TABLE IF NOT EXISTS `bootstrap`.`users_in_roles` (
 	 on DELETE NO ACTION ON UPDATE NO ACTION)
 Engine = InnoDB
 
+
+alter table bootstrap.users 
+add column `date_registered` datetime null
+

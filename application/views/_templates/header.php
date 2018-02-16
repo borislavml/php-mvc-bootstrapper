@@ -1,4 +1,5 @@
-<?php $user_is_logged = Security::is_logged($this->db);
+<?php $active_menu_option = "";
+      $user_is_logged = Security::is_logged($this->db);
       $user_id = Security::get_current_userid($this->db);
       $user_is_admin = $user_is_logged && Security::user_is_in_role($this->db, $user_id, Config::get('ROLE_ADMIN')) 
 ?>
@@ -66,7 +67,7 @@
         </nav>
         <!-- navbar-menu end -->
         <!-- main start -->
-        <div class="container-fluid" style="padding:5px">
+        <div class="container-fluid main-page-container">
           <div class="row">                    
             
 

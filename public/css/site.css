@@ -1,3 +1,40 @@
-.error-template {padding: 40px 15px;text-align: center;}
-.error-actions {margin-top:15px;margin-bottom:15px;}
-.error-actions .btn { margin-right:10px; }
+
+body {
+    background-color: #e6e6e6;
+}
+
+.main-page-container {
+    padding:5px;
+}
+
+.custom-bootstrap-table {
+    background:white;
+}
+
+.custom-bootstrap-table > thead > tr > th {
+    background:#ececec;
+}
+
+/* overide bootstrap's default active link color */
+ .active > a,
+ .active > a:hover,
+ .active > a:focus {
+background-color: #17a2b8 !important; 
+}
+
+.active {
+background-color: #17a2b8 !important; 
+}
+
+.error-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.error-actions {
+    margin-top:15px;
+    margin-bottom:15px;
+}
+.error-actions .btn { 
+    margin-right:10px;
+ }

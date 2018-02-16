@@ -5,7 +5,7 @@ class UserManager {
     public static function create_user($db, $email, $password){
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);   
 
-        $query_insert =  $db->prepare("INSERT INTO users (username, email, password) VALUES(:username, :email, :password)");
+        $query_insert =  $db->prepare("INSERT INTO users (username, email, password, date_registered) VALUES(:username, :email, :password, UTC_TIMESTAMP())");
         $query_insert->execute(array(':username' => $email , ':email' => $email, ':password' => $hashed_password));
         
         // return created user_id
