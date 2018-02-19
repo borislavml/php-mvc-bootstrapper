@@ -1,6 +1,7 @@
 
 body {
     background-color: #e6e6e6;
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif !important;
 }
 
 .main-page-container {
@@ -12,7 +13,8 @@ body {
 }
 
 .custom-bootstrap-table > thead > tr > th {
-    background:#ececec;
+    /* background:#ececec; */
+    background:  white;
 }
 
 /* overide bootstrap's default active link color */

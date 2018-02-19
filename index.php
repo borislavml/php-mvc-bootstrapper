@@ -16,7 +16,9 @@ require 'application/libs/usermanager.php';
 
 
 // start application
+
 $app = new Application();   
+
 
 //$current_user = UserManager::get_current_user($this->db);
 

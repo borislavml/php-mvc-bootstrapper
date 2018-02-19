@@ -10,6 +10,9 @@ class Application {
     // analyze url rewrite - parse controller, methods, params and fallbacks
     public function __construct(){
         $this->split_url();
+
+        $this->set_default_controller_and_action();
+
         // check if requested controller exists
         if (file_exists(Config::get('PATH_CONTROLLERS') . $this->controller. '.php')) {
 
@@ -19,24 +22,25 @@ class Application {
 
             // check if method/action for the requested controller exists
             if (method_exists($this->controller, $this->action)) {
-                // check if parameters exists and call method with arguemnts
-                if (isset($this->param_2)) {
-                    $this->controller->{$this->action}($this->param_1, $this->param_2);
-                } elseif(isset($this->param_1)) {
-                    $this->controller->{$this->action}($this->param_1);
+                if (!empty($this->parameters)) {
+                    // call the method and pass arguments to it
+                    call_user_func_array(array($this->controller, $this->action), $this->parameters);
                 } else {
-                 // if no parameters provided just call the method
-                   $this->controller->{$this->action}();
-                }            
+                    // if no parameters are given, just call the method without parameters
+                    $this->controller->{$this->action}();
+                }       
             } else {
-                // default/fallback to controller-> index() action
-                $this->controller->index();
+                // invalid url -> redirect to notfound or fallback to index action
+                // check if home controller hasn't been required already as default              
+                require  Config::get('PATH_CONTROLLERS') . 'home.php';  
+                $home = new Home();
+                $home->notfound();              
             }                    
         } else {
-            // invalid url 
+            // invalid url -> redirect to notfound
             require  Config::get('PATH_CONTROLLERS') . 'home.php';
             $home = new Home();
-            $home->index();
+            $home->notfound();
         }        
     }
 
@@ -57,5 +61,19 @@ class Application {
              // rebase array keys and store the URL parameters
              $this->parameters = array_values($url);
         }
+    }
+
+     /**
+     * Checks if controller and action names are given. If not, default values are put into the properties.
+     */
+    private function set_default_controller_and_action() {
+        if (!$this->controller) {
+            $this->controller = Config::get('DEFAULT_CONTROLLER');
+        }
+
+        if (!$this->action || (strlen($this->action) == 0)) {
+            $this->action = Config::get('DEFAULT_ACTION');
+        }
+
     }
 }

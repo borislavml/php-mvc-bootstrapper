@@ -12,9 +12,9 @@ class ListModel {
     }
 
     public function get_users(){
-        $query = $this->db->prepare("SELECT id, username, email, date_registered FROM users");
+        $query = $this->db->prepare("CALL sp_get_users_list()");
         $query->execute();
-
-        return $query->fetchAll();
+        
+        return $query->fetchAll(); 
     }
 }

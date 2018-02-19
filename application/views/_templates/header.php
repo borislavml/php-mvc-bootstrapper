@@ -1,7 +1,7 @@
 <?php $active_menu_option = "";
       $user_is_logged = Security::is_logged($this->db);
       $user_id = Security::get_current_userid($this->db);
-      $user_is_admin = $user_is_logged && Security::user_is_in_role($this->db, $user_id, Config::get('ROLE_ADMIN')) 
+      $user_is_admin = $user_is_logged && $user_id !== -1 && Security::user_is_in_role($this->db, $user_id, Config::get('ROLE_ADMIN')) 
 ?>
 
 <!DOCTYPE html>

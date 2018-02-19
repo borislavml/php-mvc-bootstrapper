@@ -33,6 +33,8 @@ return array (
     'PATH_MODELS' => 'application/models/',
     'PATH_VIEWS' => './application/views/',
     'PATH_VIEWS_TEMPLATES' => './application/views/_templates/',
+    'DEFAULT_CONTROLLER' => 'home',
+    'DEFAULT_ACTION' => 'index',
 
     /** 
      * DB related 
@@ -42,7 +44,7 @@ return array (
     'DB_HOST' => 'localhost',
     'DB_NAME' => 'bootstrap',
     'DB_USER' => 'root' ,
-    'DB_PASS' => '***********************************',   
+    'DB_PASS' => '************************',   
 
 
     /**

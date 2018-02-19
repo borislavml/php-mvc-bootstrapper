@@ -69,6 +69,35 @@ CREATE TABLE IF NOT EXISTS `bootstrap`.`users_in_roles` (
 Engine = InnoDB
 
 
+---------------------------------------------
+-- alter table users - add registration date
+-- -----------------------------------------------------
+
 alter table bootstrap.users 
 add column `date_registered` datetime null
+
+
+---------------------------------------------
+-- stored procedure sp_get_users_list()
+-- -----------------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE sp_get_users_list ()
+BEGIN
+	SELECT
+	 u.id,
+	 u.email,
+	 u.date_registered,
+	 (SELECT 
+		GROUP_CONCAT(role_name SEPARATOR ', ') 
+	  FROM roles as r
+	  JOIN users_in_roles as ur on ur.role_id = r.id
+	  WHERE ur.user_id = u.id) as user_roles
+	FROM users as u;	
+END;
+//
+
+DELIMITER;
+	
 

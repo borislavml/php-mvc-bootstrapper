@@ -5,8 +5,11 @@ class Users extends Controller {
 
     /** TO DO - AUTHORIZATION */
     public function list() {
-        // handle POST request for searching
-        if (isset($_POST['list'])) {
+        // redirect unauthorized users
+        $user_id = Security::get_current_userid($this->db);
+        $user_is_admin = $user_id !== -1 && Security::user_is_in_role($this->db, $user_id, Config::get('ROLE_ADMIN'));
+        if (!$user_is_admin) {
+            header('location: ' . Config::get('URL') . 'home/forbidden');
         }
 
         $users_model = $this->load_model('users', 'ListModel');
@@ -19,8 +22,6 @@ class Users extends Controller {
 
         require Config::get('PATH_VIEWS_TEMPLATES') . 'sidebar.php';
         require Config::get('PATH_VIEWS') . 'users/list.php';
-        require Config::get('PATH_VIEWS_TEMPLATES') . 'footer.php';
-
-     
+        require Config::get('PATH_VIEWS_TEMPLATES') . 'footer.php';     
     }
 }

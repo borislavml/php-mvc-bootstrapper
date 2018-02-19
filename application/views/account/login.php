@@ -8,7 +8,14 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">@</div>
                 </div>
-                <input type="email"  name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                <input type="email"  
+                       name="email" 
+                       class="form-control" 
+                       id="email" 
+                       aria-describedby="emailHelp" 
+                       placeholder="Enter email"
+                       <?php  if(isset($email)) { echo 'value="'. $email .'"'; }?>
+                        required>
             </div>
             <small id="emailHelp" class="form-text text-muted">Enter your email address</small>
         </div>
