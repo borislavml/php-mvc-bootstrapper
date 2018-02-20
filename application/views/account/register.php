@@ -19,17 +19,27 @@
                        <?php  if(isset($email)) { echo 'value="'. $email .'"'; }?>
                        required>                
             </div>
-            <small id="emailHelp" class="form-text text-muted">Provide an email address</small>
+            <!-- <small id="emailHelp" class="form-text text-muted">Provide an email address</small> -->
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter Password" required>
-            <small id="passwordHelp" class="form-text text-muted">Your password must be 6-20 characters long</small>
+            <input type="password"
+                   name="password" 
+                   class="form-control" 
+                   id="password" 
+                   aria-describedby="passwordHelp" 
+                   placeholder="Enter Password" required>
+            <!-- <small id="passwordHelp" class="form-text text-muted">Your password must be 6-20 characters long</small> -->
         </div>
         <div class="form-group">
             <label for="passwordConfirm">Confirm Password</label>
-            <input type="password" class="form-control" name="confirm-password" id="passwordConfirm" aria-describedby="passwordConfirmHelp" placeholder="Confirm Password" required>
-            <small id="passwordConfirmHelp" class="form-text text-muted">Confirm your password</small>
+            <input type="password" 
+                   class="form-control" 
+                   name="confirm-password" 
+                   id="passwordConfirm" 
+                   aria-describedby="passwordConfirmHelp" 
+                   placeholder="Confirm Password" required>
+            <!-- <small id="passwordConfirmHelp" class="form-text text-muted">Confirm your password</small> -->
         </div>                      
         <div class="text-center">
             <button type="submit" name="create-account" class="btn btn-primary">Register</button>

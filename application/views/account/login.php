@@ -17,12 +17,12 @@
                        <?php  if(isset($email)) { echo 'value="'. $email .'"'; }?>
                         required>
             </div>
-            <small id="emailHelp" class="form-text text-muted">Enter your email address</small>
+            <!-- <small id="emailHelp" class="form-text text-muted">Enter your email address</small> -->
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter Password" required>
-            <small id="passwordHelp" class="form-text text-muted">Enter your password</small>
+            <!-- <small id="passwordHelp" class="form-text text-muted">Enter your password</small> -->
         </div>                   
         <div class="text-center">
             <button type="submit" name="login" class="btn btn-primary">Login</button>
