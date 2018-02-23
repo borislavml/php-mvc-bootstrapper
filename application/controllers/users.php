@@ -48,16 +48,28 @@ class Users extends Controller {
         require Config::get('PATH_VIEWS_TEMPLATES') . 'footer.php';     
     }
     
-    public function edit_user(){
+    public function edit_user_profile(){
         // redirect unauthorized users
         $user_id = Security::get_current_userid($this->db);
         $user_is_admin = $user_id !== -1 && Security::user_is_in_role($this->db, $user_id, Config::get('ROLE_ADMIN'));
         if ($user_is_admin) {
             header('Content-Type: application/json');
             echo json_encode(array('error' => 'No permission'));            
+            return;
         }
 
-        // $users_model = $this->load_model('users', 'EditModel');
-        // $user = $users_model->edit_user();
+        $query = $this->db->prepare("UPDATE users SET username=:username, email=:email WHERE id=:id");
+        $update =  $query->execute(array(':username' => $_POST['username'], ':email' => $_POST['email'], ':id' => $_POST['user_id']));
+                     
+        if ($update == 1) {
+            header('Content-Type: application/json');
+            echo json_encode(array('message' => 'User profile sucessfully updated'));      
+        } else {
+            $user = Security::get_user($this->db, $_POST['user_id']);
+            header('Content-Type: application/json');
+            echo json_encode(array('error' => 'Error trying to update user profile!', 
+                                   'email' => $user->email,
+                                    'username' => $user->username)); 
+        }
     }
 }

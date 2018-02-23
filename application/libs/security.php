@@ -26,6 +26,14 @@ class Security {
          return -1;
     }
 
+    public static function get_user($db, $id){
+            $query = $db->prepare("SELECT email, username, date_registered from users WHERE id=:id");
+            $query->execute(array(':id'=> $id));
+            $result = $query->fetchAll();
+
+            return isset($result[0]) ? $result[0]: null;            
+    }
+
     public static function get_current_username($db){
         if (isset($_COOKIE['SNID'])) {
             $query = $db->prepare("SELECT u.username FROM users as u

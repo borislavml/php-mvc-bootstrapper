@@ -44,7 +44,7 @@ return array (
     'DB_HOST' => 'localhost',
     'DB_NAME' => 'bootstrap',
     'DB_USER' => 'root' ,
-    'DB_PASS' => '*********************',   
+    'DB_PASS' => '*****************************',   
 
 
     /**
