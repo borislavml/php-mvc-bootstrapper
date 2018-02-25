@@ -24,7 +24,7 @@ ini_set('session.cookie_httponly', 1);
  * This is used by the Libs/Config class.
  */
 return array (
-    'URL' => 'http://localhost:8080/php-mvc-bootstrapper/',
+    'URL' => 'http://localhost/php-mvc-bootstrapper/',
     
     /** 
      * MVC related 
@@ -44,14 +44,13 @@ return array (
     'DB_HOST' => 'localhost',
     'DB_NAME' => 'bootstrap',
     'DB_USER' => 'root' ,
-    'DB_PASS' => '*****************************',   
-
+    'DB_PASS' => '****************************',   
 
     /**
      * DB user roles 
      */
-    'ROLE_ADMIN' => '784e1b64-1241-11e8-9f5a-10c37b93cc7b',
-    'ROLE_CONSUMER' => '77fbc319-1241-11e8-9f5a-10c37b93cc7b',
+    'ROLE_ADMIN' => 2,
+    'ROLE_CONSUMER' => 1,
 );
 
 

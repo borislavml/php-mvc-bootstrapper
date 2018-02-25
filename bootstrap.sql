@@ -6,19 +6,19 @@ USE `bootstrap` ;
 -- -----------------------------------------------------
 -- Table `users`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bootstrap`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(1028) NOT NULL,
+  `date_registered` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
--- --------insert into `bootstrap`.`roles`
-(`id`, `role_name`)
-values 
-(UUID(), 'consumer'),
-(UUID(), 'admin');
+
+
+
 ---------------------------------------------
 -- Table `login_tokens`
 -- -----------------------------------------------------
@@ -39,7 +39,7 @@ ENGINE = InnoDB;
 -- Table `roles`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bootstrap`.`roles` (
-`id` varchar(36) not null,
+`id` INT not null,
 `role_name` varchar(20) not null,
  Primary KEY (`id`),
  UNIQUE INDEX `role_name_unique` (`role_name` ASC))
@@ -48,8 +48,8 @@ Engine= InnoDB
 insert into `bootstrap`.`roles`
 (`id`, `role_name`)
 values 
-(UUID(), 'consumer'),
-(UUID(), 'admin');
+(1, 'consumer'),
+(2, 'admin');
 
 
 ---------------------------------------------
@@ -57,7 +57,7 @@ values
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bootstrap`.`users_in_roles` (
 	`user_id` int not null,
-	`role_id` varchar(36) not null,
+	`role_id` int not null,
 	CONSTRAINT
 	PRIMARY KEY (`user_id`, `role_id`),
 	CONSTRAINT
@@ -69,13 +69,10 @@ CREATE TABLE IF NOT EXISTS `bootstrap`.`users_in_roles` (
 Engine = InnoDB
 
 
----------------------------------------------
--- alter table users - add registration date
--- -----------------------------------------------------
-
-alter table bootstrap.users 
-add column `date_registered` datetime null
-
+insert into users_in_roles
+(`user_id`, `role_id`)
+values
+(1, 2)
 
 ---------------------------------------------
 -- stored procedure sp_get_users_list()

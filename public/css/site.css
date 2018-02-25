@@ -1,31 +1,32 @@
-
 body {
     background-color: #e6e6e6;
     font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif !important;
 }
 
 .main-page-container {
-    padding:5px;
+    padding: 5px;
 }
 
 .custom-bootstrap-table {
-    background:white;
+    background: white;
 }
 
-.custom-bootstrap-table > thead > tr > th {
+.custom-bootstrap-table>thead>tr>th {
     /* background:#ececec; */
-    background:  white;
+    background: white;
 }
+
 
 /* overide bootstrap's default active link color */
- .active > a,
- .active > a:hover,
- .active > a:focus {
-background-color: #17a2b8 !important; 
+
+.active>a,
+.active>a:hover,
+.active>a:focus {
+    background-color: #17a2b8 !important;
 }
 
 .active {
-background-color: #17a2b8 !important; 
+    background-color: #17a2b8 !important;
 }
 
 .error-template {
@@ -34,9 +35,18 @@ background-color: #17a2b8 !important;
 }
 
 .error-actions {
-    margin-top:15px;
-    margin-bottom:15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
-.error-actions .btn { 
-    margin-right:10px;
- }
+
+.error-actions .btn {
+    margin-right: 10px;
+}
+
+.center-div {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}

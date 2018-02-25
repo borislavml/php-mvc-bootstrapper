@@ -6,7 +6,7 @@
 
 <!DOCTYPE html>
 <html lang="eng">
-    <head>
+    <he ad>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>PHP MVC skeleton</title>
@@ -51,14 +51,16 @@
                             role="button" 
                             data-toggle="dropdown" 
                             aria-haspopup="true" 
-                            aria-expanded="false"> <?php  echo Security::get_current_username($this->db);?></a>
+                            aria-expanded="false"> <?php  echo Security::get_current_user_email($this->db);?></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="<?php echo Config::get('URL'); ?>account/profile">My account</a>
                                 <form action="<?php echo Config::get('URL'); ?>account/logout" 
                                       method="POST" 
                                       id="logout-form" 
                                       class="form-inline">
                                     <a class="dropdown-item" name="logout"  href="javascript:void(0)">Logout</a>          
                                 </form> 
+                
                             </div>
                          </li>
                     <?php } ?>

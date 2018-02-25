@@ -4,6 +4,7 @@ class Security {
 
     public static function generate_token() {
         $crypto_strong  = True;
+
         return bin2hex(openssl_random_pseudo_bytes(64, $crypto_strong));
     }
 
@@ -47,6 +48,20 @@ class Security {
          return "";
     }
 
+    public static function get_current_user_email($db){
+        if (isset($_COOKIE['SNID'])) {
+            $query = $db->prepare("SELECT u.email FROM users as u
+                                   JOIN login_tokens as t on u.id = t.user_id 
+                                   WHERE t.token =:token");
+            $query->execute(array(':token'=> sha1($_COOKIE['SNID'])));
+
+            return $query->fetchAll()[0]->email;
+         }
+
+         return "";
+    }
+
+
     public static function set_cookie($token) {
         setcookie("BID",$token, time() + 60 * 60 * 24 * 7, NULL, NULL, TRUE);
     }
@@ -88,10 +103,6 @@ class Security {
         return false;
     }
 
-    public static function register($db, $password, $email) {
-
-    }
-
     public static function login($db, $email) {
         // generate token, insert hashed token in DB, set token in cookie
         $token = Security::generate_token($db);
@@ -125,5 +136,11 @@ class Security {
 
         return isset($result[0]->user_id);        
     }
+
+    public static function authorize($db, $role) {
+        $user_id = self::get_current_userid($db);
+        
+        return ($user_id !== -1) && self::user_is_in_role($db, $user_id, $role);
+    } 
 }
 

@@ -15,8 +15,8 @@ class RegisterModel {
         $validation_message = ""; 
         if(empty($password)){
             $validation_message .= "Password is required";
-        } else if(strlen($password) < 8 || strlen($password) > 60){
-                $validation_message .= "Password should be between 8 and 60 charachters long";   
+        } else if(strlen($password) < 8 || strlen($password) > 20){
+                $validation_message .= "Password should be between 8 and 20 charachters long";   
         } else if(empty($email)) {
             $validation_message .= "Email is required";
         } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){

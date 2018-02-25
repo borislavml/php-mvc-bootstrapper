@@ -13,6 +13,7 @@ require 'application/libs/application.php';
 require 'application/libs/controller.php';
 require 'application/libs/security.php';
 require 'application/libs/usermanager.php';
+require 'application/libs/enumerations.php';
 
 
 // start application

@@ -29,7 +29,7 @@
                    id="password" 
                    aria-describedby="passwordHelp" 
                    placeholder="Enter Password" required>
-            <!-- <small id="passwordHelp" class="form-text text-muted">Your password must be 6-20 characters long</small> -->
+            <small id="passwordHelp" class="form-text text-muted">Your password must be 8 - 20 characters long</small>
         </div>
         <div class="form-group">
             <label for="passwordConfirm">Confirm Password</label>
@@ -39,7 +39,7 @@
                    id="passwordConfirm" 
                    aria-describedby="passwordConfirmHelp" 
                    placeholder="Confirm Password" required>
-            <!-- <small id="passwordConfirmHelp" class="form-text text-muted">Confirm your password</small> -->
+            <small id="passwordConfirmHelp" class="form-text text-muted">Confirm your password</small>
         </div>                      
         <div class="text-center">
             <button type="submit" name="create-account" class="btn btn-primary">Register</button>
