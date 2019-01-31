@@ -96,5 +96,43 @@ END;
 //
 
 DELIMITER;
-	
 
+
+---------------------------------------------
+-- Table `permision_groups`
+-- -----------------------------------------------------
+CREATE TABLE `bootstrap`.`permision_groups` (
+ `permission_group_id` int not null,
+ `name` varchar(52) not null,
+ PRIMARY KEY (`permission_group_id`),
+ UNIQUE INDEX `role_name_unique` (`name` ASC))
+ Engine = InnoDB
+ 
+ 
+ CREATE TABLE `bootstrap`.`permissions` (
+  `permission_id` int not null,
+  `permission_group_id` int not null,
+  `name` varchar(52) not null,
+  PRIMARY KEY (`permission_id`),
+  CONSTRAINT 
+  FOREIGN KEY (`permission_group_id`) REFERENCES `bootstrap`.`permision_groups`(`permission_group_id`))
+  Engine = InnoDB
+ 
+ CREATE TABLE `bootstrap`.`user_permissions`(
+  `user_permission_id` int not null AUTO_INCREMENT,
+  `user_id` int not null,
+  `permission_id` int not null,
+   PRIMARY KEY (`user_permission_id`),
+   CONSTRAINT
+	FOREIGN KEY (`user_id`) REFERENCES users(`id`),
+	CONSTRAINT 
+	FOREIGN KEY (`permission_id`) REFERENCES `bootstrap`.`permissions`(`permission_id`))
+  Engine = InnoDB
+ 
+
+
+INSERT INTO `bootstrap`.`permision_groups` 
+VALUES (1, 'consumer permissions'),
+	   (2, 'admin permisions')
+	
+Shooger.Test

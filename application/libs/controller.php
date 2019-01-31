@@ -12,7 +12,7 @@ class Controller {
         $this->open_db_conncetion();
     }
 
-    public function load_model($model_folder, $model_name){
+    public function load_model(string $model_folder, string $model_name){
         require Config::get('PATH_MODELS') . $model_folder . '/' . strtolower($model_name) . '.php';
         
         //  pass db connetion to model and return it

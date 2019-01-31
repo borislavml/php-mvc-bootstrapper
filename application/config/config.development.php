@@ -44,13 +44,18 @@ return array (
     'DB_HOST' => 'localhost',
     'DB_NAME' => 'bootstrap',
     'DB_USER' => 'root' ,
-    'DB_PASS' => '****************************',   
+    'DB_PASS' => '',   
 
     /**
      * DB user roles 
      */
     'ROLE_ADMIN' => 2,
     'ROLE_CONSUMER' => 1,
+
+    /**
+     * DB permisions groups
+     * 
+     */
 );
 
 
